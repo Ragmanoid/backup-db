@@ -6,7 +6,7 @@ const mysql = async () => {
     if (!res)
         console.error('Error backup mysql')
     else 
-        sendFile('mysql.gzip')
+        sendFile('mysql.gz')
 }
 
 module.exports = mysql
