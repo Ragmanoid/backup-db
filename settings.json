@@ -1,0 +1,17 @@
+{
+    "mega": {
+        "email": "email",
+        "password": "password",
+        "savePath": "/folder"
+    },
+    "backups": {
+        "mongo": {
+            "backup": true,
+            "schedule": "0 0 * * *"
+        },
+        "mysql": {
+            "backup": true,
+            "schedule": "0 0 * * *"
+        }
+    }
+}

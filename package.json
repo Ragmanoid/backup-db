@@ -1,0 +1,36 @@
+{
+  "name": "backup-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ragmanoid/backup-db.git"
+  },
+  "keywords": [
+    "automate",
+    "backup",
+    "databases"
+  ],
+  "author": "Ragman (Mikhail Lapin)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ragmanoid/backup-db/issues"
+  },
+  "homepage": "https://github.com/Ragmanoid/backup-db#readme",
+  "dependencies": {
+    "@pm2/io": "^5.0.0",
+    "fs-extra": "^10.0.0",
+    "megajs": "^0.17.2",
+    "minimatch": "^3.0.4",
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0",
+    "progress-stream": "^2.0.0",
+    "sanitize-filename": "^1.6.3",
+    "shaper": "^0.0.5"
+  }
+}
