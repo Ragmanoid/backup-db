@@ -6,12 +6,10 @@
     },
     "backups": {
         "mongo": {
-            "backup": true,
-            "schedule": "0 0 * * *"
+            "backup": true
         },
         "mysql": {
-            "backup": true,
-            "schedule": "0 0 * * *"
+            "backup": true
         }
     }
 }

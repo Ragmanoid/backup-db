@@ -28,7 +28,6 @@
     "megajs": "^0.17.2",
     "minimatch": "^3.0.4",
     "moment": "^2.29.1",
-    "node-cron": "^3.0.0",
     "progress-stream": "^2.0.0",
     "sanitize-filename": "^1.6.3",
     "shaper": "^0.0.5"
