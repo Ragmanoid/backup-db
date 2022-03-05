@@ -5,6 +5,7 @@ const axios = require('axios')
 const settings = require('./settings.json')
 const getLinkForUpload = require('./getLinkForUpload')
 
+const maxSize = 10 * 1024 * 1024 * 1024
 
 const sendFile = async fileName => {
     fs.stat('./tmp/' + fileName, async (error, _) => {
@@ -18,7 +19,7 @@ const sendFile = async fileName => {
             process.exit(1)
         }
 
-        let name = `${moment().format('LLLL')} ${fileName}`
+        let name = `${moment().format()} ${fileName}`
         name = name.replace(/:/g, '-')
         name = name.replace(/,/g, '')
         name = name.replace(/ /g, '_')
@@ -39,13 +40,13 @@ const sendFile = async fileName => {
             result.href,
             fs.createReadStream(`./tmp/${fileName}`),
             {
-                maxContentLength: 10 * 1024 * 1024 * 1024,
-                maxBodyLength: 10 * 1024 * 1024 * 1024
+                maxContentLength: maxSize,
+                maxBodyLength: maxSize
             }
         )
 
         if (resp.status === 201) {
-            console.log('[!] Upload complete')
+            console.log(`[!] Start complete ${fileName}`)
         } else {
             console.error(resp)
         }
