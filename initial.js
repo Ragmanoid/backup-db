@@ -1,43 +1,47 @@
 const cmd = require('./useCommand')
 const fs = require('fs')
 const settings = require('./settings.json')
-const { getLoggedAccount } = require('./login-handler')
-const { getNodeByPath } = require('./util')
+const getDiskInfo = require('./getDiskInfo')
 
 const initial = async () => {
-    // Check connection Mega
-    const { err, storage } = await getLoggedAccount({ 
-        email: settings.mega.email, 
-        password: settings.mega.password 
-    })
-    if (err) 
-        throw new Error(err)
+    // Check connection Yandex Disk
+    const result = await getDiskInfo(settings.yandex.apiKey)
+    console.log(result)
 
-    const path = settings.mega.savePath.split('/').filter(e => e)
-    const node = getNodeByPath(path, storage.root)
+    if (result.error) {
+        console.error(result)
+        process.exit(1)
+    }
 
-    if (!node) 
-        throw new Error('ERROR: save folder (mega) not found')
+    // Check folder
+    var folder = result._embedded.items.find(item =>
+        item.type === 'dir' && item.name === settings.yandex.savePath
+    )
 
-    storage.close()
-    
-    console.log('[+] Successful authorization mega')
-    
+    if (!folder)
+        throw new Error(`Not found folder "${settings.yandex.savePath}"`)
+
+    console.log('[+] Successful authorization Yandex')
+
     // Check connection Mongo
     if (settings.backups.mongo.backup) {
         const mongoState = await cmd('mongodump --version')
+
         if (!mongoState)
             throw new Error('mongodump was not found')
+
         console.log('[+] Successful find mongodump')
     }
-        
-    // Check connection mysql
+
+    // Check connection MySQL
     if (settings.backups.mysql.backup) {
         const mysqlState = await cmd('mysqldump --version')
         if (!mysqlState)
             throw new Error('mysqldump was not found')
+
         console.log('[+] Successful find mysqldump')
     }
+
     // Add tmp folder
     const dir = __dirname + '/tmp';
     if (!fs.existsSync(dir)) {

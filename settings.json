@@ -1,15 +1,14 @@
 {
-    "mega": {
-        "email": "email",
-        "password": "password",
-        "savePath": "/folder"
+    "yandex": {
+        "savePath": "folder",
+        "apiKey": "API_KEY"
     },
     "backups": {
         "mongo": {
             "backup": true
         },
         "mysql": {
-            "backup": true
+            "backup": false
         }
     }
 }
