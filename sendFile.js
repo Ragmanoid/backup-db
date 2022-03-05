@@ -46,7 +46,7 @@ const sendFile = async fileName => {
         )
 
         if (resp.status === 201) {
-            console.log(`[!] Start complete ${fileName}`)
+            console.log(`[!] Upload complete ${fileName}`)
         } else {
             console.error(resp)
         }
