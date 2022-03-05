@@ -8,7 +8,7 @@
             "backup": true
         },
         "mysql": {
-            "backup": false
+            "backup": true
         }
     }
 }

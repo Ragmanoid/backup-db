@@ -2,7 +2,7 @@ const cmd = require('../useCommand')
 const sendFile = require('../sendFile.js')
 
 const mysql = async () => {
-    const res = await cmd('mysqldump --all-databases | gzip > ./tmp/mysql.gz')
+    const res = await cmd('mysqldump --all-databases | gzip > ./tmp/mysql.gzip')
     if (!res)
         console.error('Error backup mysql')
     else 

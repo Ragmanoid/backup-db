@@ -1,4 +1,3 @@
-const io = require('@pm2/io')
 const moment = require('moment')
 const fs = require('fs')
 const axios = require('axios')
@@ -6,13 +5,6 @@ const axios = require('axios')
 const settings = require('./settings.json')
 const getLinkForUpload = require('./getLinkForUpload')
 
-const spaceUsed = io.metric({
-    name: 'Space used on mega (in kb)'
-})
-
-const spaceTotal = io.metric({
-    name: 'Space total on mega (in kb)'
-})
 
 const sendFile = async fileName => {
     fs.stat('./tmp/' + fileName, async (error, _) => {
@@ -30,7 +22,7 @@ const sendFile = async fileName => {
         name = name.replace(/:/g, '-')
         name = name.replace(/,/g, '')
         name = name.replace(/ /g, '_')
-        
+
         const result = await getLinkForUpload({
             apiKey: settings.yandex.apiKey,
             path: `/${settings.yandex.savePath}/${name}`
@@ -41,7 +33,16 @@ const sendFile = async fileName => {
             process.exit(1)
         }
 
-        const resp = await axios.put(result.href, fs.createReadStream(`./tmp/${fileName}`))
+
+        console.log(`[!] Start upload ${fileName}`)
+        const resp = await axios.put(
+            result.href,
+            fs.createReadStream(`./tmp/${fileName}`),
+            {
+                maxContentLength: 10 * 1024 * 1024 * 1024,
+                maxBodyLength: 10 * 1024 * 1024 * 1024
+            }
+        )
 
         if (resp.status === 201) {
             console.log('[!] Upload complete')

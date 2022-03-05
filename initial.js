@@ -6,7 +6,6 @@ const getDiskInfo = require('./getDiskInfo')
 const initial = async () => {
     // Check connection Yandex Disk
     const result = await getDiskInfo(settings.yandex.apiKey)
-    console.log(result)
 
     if (result.error) {
         console.error(result)
