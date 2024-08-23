@@ -6,7 +6,7 @@ const postgres = async ({ username }) => {
     if (!res)
         console.error('Error backup postgres')
     else
-        sendFile('postgres.gzip')
+        sendFile('postgres.gz')
 }
 
 module.exports = postgres
