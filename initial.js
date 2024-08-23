@@ -41,6 +41,15 @@ const initial = async () => {
         console.log('[+] Successful find mysqldump')
     }
 
+    // Check connection Postgres
+    if (settings.backups.mysql.backup) {
+        const mysqlState = await cmd('pg_dump --version')
+        if (!mysqlState)
+            throw new Error('pg_dump was not found')
+
+        console.log('[+] Successful find pg_dump')
+    }
+
     // Add tmp folder
     const dir = __dirname + '/tmp';
     if (!fs.existsSync(dir)) {
